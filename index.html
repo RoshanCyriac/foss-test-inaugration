@@ -5,47 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FOSS CUSAT</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+        * {
             margin: 0;
-            padding: 50px;
-            background-color: #f0f0f0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            position: relative;
+            min-width: 400px;
+        }
+
         h1 {
-            color: #333;
-            font-size: 3em;
-            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 3.5em;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
         }
         
         #shuffleBtn {
-            background-color: #007bff;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
             color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 18px 40px;
+            font-size: 1.3em;
+            border-radius: 50px;
             cursor: pointer;
             margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #shuffleBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        #shuffleBtn:hover::before {
+            left: 100%;
         }
         
         #shuffleBtn:hover {
-            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+        }
+
+        #shuffleBtn:active {
+            transform: translateY(-1px);
         }
         
         #result {
-            font-size: 2em;
-            color: #333;
-            margin-top: 20px;
-            min-height: 50px;
+            font-size: 2.5em;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 30px;
+            min-height: 60px;
+            font-weight: 600;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #result:not(:empty) {
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                min-width: 300px;
+                padding: 40px 30px;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            #result {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>FOSS CUSAT</h1>
-    <button id="shuffleBtn">Shuffle</button>
-    <div id="result"></div>
+    <div class="container">
+        <h1>FOSS CUSAT</h1>
+        <button id="shuffleBtn">Shuffle</button>
+        <div id="result"></div>
+    </div>
 
     <script>
         const names = ['Roshan', 'Sarath', 'Rishi'];
