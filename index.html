@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSS CUSAT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 3em;
+            margin-bottom: 50px;
+        }
+        
+        #shuffleBtn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        
+        #shuffleBtn:hover {
+            background-color: #0056b3;
+        }
+        
+        #result {
+            font-size: 2em;
+            color: #333;
+            margin-top: 20px;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FOSS CUSAT</h1>
+    <button id="shuffleBtn">Shuffle</button>
+    <div id="result"></div>
+
+    <script>
+        const names = ['Roshan', 'Sarath', 'Rishi'];
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        const result = document.getElementById('result');
+
+        shuffleBtn.addEventListener('click', function() {
+            const randomIndex = Math.floor(Math.random() * names.length);
+            result.textContent = names[randomIndex];
+        });
+    </script>
+</body>
+</html>
